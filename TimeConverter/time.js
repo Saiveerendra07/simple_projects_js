@@ -1,31 +1,66 @@
-let userHoursInput = document.getElementById("hoursInput");
-let userMinInput = document.getElementById("minutesInput");
-let BtnElement = document.getElementById("convertBtn");
-let paraError = document.getElementById("errorMsg");
-let paraSeconds = document.getElementById("timeInSeconds");
+const userHoursInput = document.getElementById("hoursInput");
+const userMinInput = document.getElementById("minutesInput");
+const BtnElement = document.getElementById("convertBtn");
+const paraError = document.getElementById("errorMsg");
+const paraSeconds = document.getElementById("timeInSeconds");
 
-BtnElement.addEventListener("click", ConvertToSec);
+// Constant for clearer reading (60 seconds/min * 60 minutes/hr)
+const SECONDS_PER_HOUR = 3600;
 
-function ConvertToSec() {
-    paraSeconds.textContent = "";
-    paraSeconds.classList.remove("secondsTime");
-    let hours = userHoursInput.value;
-    if (hours === "") {
-        paraError.textContent = "Please enter a valid number of hours";
-        return;
+BtnElement.addEventListener("click", convertToSec);
+
+function isValidInput(value) {
+    // 1. Check if the value is empty or not a number
+    if (value === null || value.trim() === "" || isNaN(Number(value))) {
+        return false;
     }
-    let minutes = userMinInput.value;
-    if (minutes === "") {
-        paraError.textContent = "Please enter a valid number of minutes";
-        return;
+    const num = Number(value);
+    // 2. Check if the number is a non-negative integer
+    if (num < 0 || !Number.isInteger(num)) {
+        return false;
     }
-    paraError.textContent = "";
-    printSeconds(parseInt(hours), parseInt(minutes));
+    return true;
 }
 
-function printSeconds(hrs, min) {
-    let seconds = 3600 * hrs + 60 * min;
-    paraSeconds.classList.add("secondsTime")
-    paraSeconds.textContent = seconds + "s";
-    return;
+function convertToSec() {
+    // Clear previous results and errors
+    paraSeconds.textContent = "";
+    paraSeconds.classList.remove("seconds-time");
+    paraError.textContent = "";
+    
+    // Get trimmed values
+    const hoursValue = userHoursInput.value.trim();
+    const minutesValue = userMinInput.value.trim();
+    
+    // Validate Hours
+    if (!isValidInput(hoursValue)) {
+        paraError.textContent = "Please enter a non-negative whole number for hours.";
+        userHoursInput.focus();
+        return;
+    }
+    
+    // Validate Minutes
+    if (!isValidInput(minutesValue)) {
+        paraError.textContent = "Please enter a non-negative whole number for minutes.";
+        userMinInput.focus();
+        return;
+    }
+    
+    // Convert to numbers
+    const hours = parseInt(hoursValue);
+    const minutes = parseInt(minutesValue);
+    
+    // Calculate seconds
+    const totalSeconds = (SECONDS_PER_HOUR * hours) + (60 * minutes);
+    
+    // Display result
+    printSeconds(totalSeconds);
+}
+
+function printSeconds(seconds) {
+    // Only display if the result is valid
+    if (seconds >= 0) {
+        paraSeconds.classList.add("seconds-time");
+        paraSeconds.textContent = `${seconds} seconds`;
+    }
 }

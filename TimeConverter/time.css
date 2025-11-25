@@ -1,71 +1,80 @@
-@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
+/* Applied min-vh-100 for better responsiveness */
 .bg-container {
     background-image: url("https://assets.ccbp.in/frontend/dynamic-webapps/time-converter-bg.png");
     background-size: cover;
-    height: 100vh;
-    font-family: "OpenSans";
+    background-position: center;
+    min-height: 100vh;
+    font-family: "Roboto", sans-serif; /* Using a font from your import list */
+    color: white; /* Set default text color for better inheritance */
 }
 
 .main_heading {
     color: white;
-    font-size: 60px;
+    font-size: 48px; /* Slightly reduced for better mobile fit */
     font-weight: bold;
+    margin-bottom: 15px;
 }
 
 .paraElement {
     color: #f5f7fa;
-    font-size: 23px;
+    font-size: 20px;
+    margin-bottom: 25px;
 }
 
 .labelEl {
     color: white;
-    padding-top:10px;
+    font-weight: 500;
 }
 
-input {
+/* Custom styles for the input field */
+.input-custom {
+    /* Overriding Bootstrap's default styles */
     border-radius: 10px;
-    height: 36px;
-    font-family: "roboto";
+    height: 45px;
+    font-family: "Roboto", sans-serif;
     font-weight: bold;
-    padding-left: 12px;
-    width: 360px;
+    padding-left: 15px;
+    /* Use 100% width, Bootstrap column handles the size */
+    width: 100%; 
     margin-bottom: 15px;
-    margin-top: -5px;
+    margin-top: 5px;
+    /* Set background and text color to match the design */
+    background-color: white;
+    color: #333;
 }
-.button:hover {
-    background-color: #2563eb;
-    color: white;
-    cursor: pointer;
-    font-size: 15px;
-} 
-.button{
-    border-radius: 10px;
-    margin-top: 10px;
 
-}
-button {
-    border-radius: 6px;
-    padding-left: 11px;
-    padding-right: 10px;
-    margin-bottom: 8px;
+/* Custom styles for the button */
+.button-custom {
+    border-radius: 10px;
     font-size: 18px;
-    height: 40px;
+    height: 45px;
+    padding: 0 20px;
+    background-color: #007bff; /* Match Bootstrap primary color */
+    border-color: #007bff;
+    transition: background-color 0.3s;
+} 
+
+.button-custom:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    cursor: pointer;
 }
 
 .errorMsg {
-    font-size: 13px;
-    color: #ffffffcc;
-    font-family: "roboto";
+    font-size: 14px;
+    color: #ff6961; /* Using a red color for errors */
+    font-weight: bold;
 }
 
-.secondsTime {
+/* Updated class name for result display */
+.seconds-time {
     color: white;
     font-size: 32px;
     font-weight: bold;
     border-radius: 10px;
-    padding: 8px;
-    width: 200px;
-    margin-top: 6px;
+    padding: 8px 20px;
+    margin-top: 15px;
     border: 1px solid white;
+    display: inline-block; /* To make width fit content */
 }
